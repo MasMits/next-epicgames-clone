@@ -15,9 +15,9 @@ const Layout = ({children}: PropsWithChildren<{}>) => {
             mode: 'dark',
             primary: {
                 light: '#757ce8',
-                main: '#E5E2E1',
+                main: '#b2b0b0',
                 dark: '#171717',
-                contrastText: '#C7C6C6',
+                contrastText: '#545454',
             },
             secondary: {
                 light: '#ff7961',
@@ -39,7 +39,6 @@ const Layout = ({children}: PropsWithChildren<{}>) => {
             <Header/>
             <main className={styles.main}>{children}
                 <div className={styles.description}>
-                    Home Page
                 </div>
             </main>
         </ThemeProvider>

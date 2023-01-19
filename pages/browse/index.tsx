@@ -1,35 +1,50 @@
 import Layout from "../../components/Layout";
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import {Grid} from "@mui/material";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
+import SortZone from "../../components/browse_components/SortZone";
+import GamesGrid from "../../components/browse_components/GamesGrid";
+import {NextPageContext} from "next";
+import {IGame} from "../../types/IGame";
+import FilterZone from "../../components/browse_components/FilterZone";
+import {useState} from "react";
 
-export default function Browse() {
+
+export const getServerSideProps = async (ctx: NextPageContext) => {
+    const response = await fetch(`http://localhost:3000/api/games`);
+    const data = await response.json();
+    return {props: {data: [...data]}};
+}
+
+export interface ICardProps {
+    data: IGame[];
+}
+
+
+const Browse = (games: ICardProps) => {
+    const [typeOfCompare, setTypeOfCompare] = useState('value2');
+
     return (
         <Layout>
-            <Card sx={{ maxWidth: 345 }}>
-                <CardMedia
-                    sx={{ height: 140 }}
-                    image="https://critter-sitters.com/wp-content/uploads/2018/01/atlanta-long-term-pet-sitters.jpeg"
-                    title="green iguana"
-                />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Lizard
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Lizards are a widespread group of squamate reptiles, with over 6,000
-                        species, ranging across all continents except Antarctica
-                    </Typography>
-                </CardContent>
-                <CardActions>
-                    <Button size="small">Share</Button>
-                    <Button size="small">Learn More</Button>
-                </CardActions>
-            </Card>
-
+            <Stack spacing={2}>
+                <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+                    <Grid item xs={2} container spacing={2}>
+                        <SortZone setTypeOfCompare={setTypeOfCompare}/>
+                    </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                    <GamesGrid games={games} typeOfCompare={typeOfCompare} filter={' '}/>
+                    <Grid item xs={3} container spacing={2}>
+                        <FilterZone/>
+                    </Grid>
+                </Grid>
+            </Stack>
+            <Stack spacing={2}>
+                <Pagination count={10}/>
+            </Stack>
         </Layout>
     )
 }
+
+export default Browse;

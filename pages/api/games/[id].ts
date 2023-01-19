@@ -7,5 +7,5 @@ export default function handler(
     res: NextApiResponse<IGame>
 ) {
     const id  = Number(req.query.id);
-    res.status(200).json(games[id-1]);
+    res.status(200).json(games[id]);
 }

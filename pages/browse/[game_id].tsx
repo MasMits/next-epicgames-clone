@@ -10,7 +10,7 @@ export const getServerSideProps = async (ctx: NextPageContext) => {
 }
 
 const Game = (game : IGame) => {
-    console.log(game.data.game_name)
+    console.log(game)
     return (
         <Layout>
             <MediumCard data={game.data}/>

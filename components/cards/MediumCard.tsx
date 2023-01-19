@@ -22,7 +22,7 @@ const MediumCard: FC<IGame> = (game) => {
                     {game.data.game_name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                   200 UAH
+                    {game.data.price} UAH
                 </Typography>
             </CardContent>
         </Card>

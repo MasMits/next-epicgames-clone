@@ -2,14 +2,18 @@ import Layout from "../../components/Layout";
 import {IGame} from "../../types/IGame";
 import {NextPageContext} from "next";
 import MediumCard from "../../components/cards/MediumCard";
-
+import {notFind} from '../api/data/notFind'
 export const getServerSideProps = async (ctx: NextPageContext) => {
-    const response = await fetch(`http://localhost:3000/api/games/${ctx.query.game_id}`);
-    const data = await response.json();
-    return {props: {...data}};
+    try {
+        const response = await fetch(`${process.env.API_HOST}/games/${ctx.query.game_id}`);
+        const data = await response.json();
+        return {props: {...data}};
+    } catch {
+        return {props: {notFind}};
+    }
 }
 
-const Game = (game : IGame) => {
+const Game = (game: IGame) => {
     console.log(game)
     return (
         <Layout>

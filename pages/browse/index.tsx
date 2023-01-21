@@ -12,9 +12,13 @@ import {useState} from "react";
 
 
 export const getServerSideProps = async (ctx: NextPageContext) => {
-    const response = await fetch(`http://localhost:3000/api/games`);
-    const data = await response.json();
-    return {props: {data: [...data]}};
+    try {
+        const response = await fetch(`${process.env.API_HOST}/games`);
+        const data = await response.json();
+        return {props: {data: [...data]}};
+    }catch{
+        return {props: {data: []}};
+    }
 }
 
 export interface ICardProps {

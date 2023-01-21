@@ -25,7 +25,7 @@ const MediumCardContainer: FC<ICardProps> = (gamesList) => {
             </Box>
             <div className="medium_cards">
                 {gamesList.games.map((item) =>
-                    <Link href={`browse/${item.data.id}`}><MediumCard key={item.data.id} data={item.data}/></Link>
+                    <Link  key={item.data.id} href={`browse/${item.data.id}`}><MediumCard data={item.data}/></Link>
                 )}
             </div>
         </div>

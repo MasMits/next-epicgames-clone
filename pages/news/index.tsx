@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 export default function News() {
     return (
         <Layout>
-            It's empty here
+            It is empty here
         </Layout>
     )
 }

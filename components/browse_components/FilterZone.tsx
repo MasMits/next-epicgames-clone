@@ -1,13 +1,20 @@
 import {InputAdornment, TextField} from "@mui/material";
 import * as React from "react";
 import MultipleSelectCheckmarks from "./MultipleSelectCheckmarks";
-import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import SearchIcon from "@mui/icons-material/Search";
+import RangeSlider from "./RangeSlider";
 
+export interface IProps {
+    value: number[],
+    setValue: Function
+    genres: string[],
+    setGenres: Function,
+    setSearchTitle: Function
+}
 
-const FilterZone = () => {
+const FilterZone = (props: IProps) =>{
 
     const genre = {
         label: "GENRE",
@@ -31,19 +38,16 @@ const FilterZone = () => {
         ]
     };
 
-
     return (
         <Stack gap={2}>
-            <Stack direction="row" justifyContent="space-between" alignItems="center">
-                <Typography variant="subtitle2" display="block" gutterBottom>
-                    Filter (1)
-                </Typography>
+            <Stack direction="row" justifyContent="flex-end" alignItems="center">
                 <Button variant="text">Reset</Button>
             </Stack>
             <TextField
                 fullWidth
                 id="outlined-input-with-icon-textfield"
                 label="Search"
+                onChange={(event) => props.setSearchTitle(event.target.value)}
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
@@ -53,9 +57,9 @@ const FilterZone = () => {
                 }}
                 variant="outlined"
             />
+            <MultipleSelectCheckmarks label={genre.label} names={genre.names} genres={props.genres} setGenres={props.setGenres}/>
+            <RangeSlider setValue={props.setValue} value={props.value}/>
 
-            <MultipleSelectCheckmarks label={price.label} names={price.names}/>
-            <MultipleSelectCheckmarks label={genre.label} names={genre.names}/>
         </Stack>
     );
 };

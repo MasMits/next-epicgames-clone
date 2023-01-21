@@ -20,17 +20,18 @@ const MenuProps = {
 
 export interface ISelectProps{
     label: string,
-    names: string[]
+    names: string[],
+    genres: string[],
+    setGenres: Function
 }
 
-export default function MultipleSelectCheckmarks(games: ISelectProps) {
-    const [option, setOption] = React.useState<string[]>([]);
+export default function MultipleSelectCheckmarks(props: ISelectProps) {
 
-    const handleChange = (event: SelectChangeEvent<typeof option>) => {
+    const handleChange = (event: SelectChangeEvent<typeof props.genres>) => {
         const {
             target: { value },
         } = event;
-        setOption(
+        props.setGenres(
             typeof value === 'string' ? value.split(',') : value,
         );
     };
@@ -38,20 +39,20 @@ export default function MultipleSelectCheckmarks(games: ISelectProps) {
     return (
         <div>
             <FormControl sx={{ width: 300 }}>
-                <InputLabel id="demo-multiple-checkbox-label">{games.label}</InputLabel>
+                <InputLabel id="demo-multiple-checkbox-label">{props.label}</InputLabel>
                 <Select
                     labelId="demo-multiple-checkbox-label"
                     id="demo-multiple-checkbox"
                     multiple
-                    value={option}
+                    value={props.genres}
                     onChange={handleChange}
                     input={<OutlinedInput label="GENRE" />}
                     renderValue={(selected) => selected.join(', ')}
                     MenuProps={MenuProps}
                 >
-                    {games.names.map((name) => (
+                    {props.names.map((name) => (
                         <MenuItem key={name} value={name}>
-                            <Checkbox checked={option.indexOf(name) > -1} />
+                            <Checkbox checked={props.genres.indexOf(name) > -1} />
                             <ListItemText primary={name} />
                         </MenuItem>
                     ))}

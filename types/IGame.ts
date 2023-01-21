@@ -3,6 +3,7 @@ export interface IGame {
         id: number,
         type: string,
         price: number,
+        genre: string[],
         game_name: string,
         short_description: string,
         header_image: string,

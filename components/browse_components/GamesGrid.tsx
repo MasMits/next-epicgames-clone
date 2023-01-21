@@ -7,7 +7,9 @@ import {Grid} from "@mui/material";
 export interface ICardProps {
     games: { data: IGame[] },
     typeOfCompare: string,
-    filter: string
+    price: number[],
+    genres: string[],
+    searchTitle: string
 }
 
 
@@ -35,17 +37,27 @@ const GamesGrid = (props: ICardProps) => {
         if (a < b) return -1;
         return 0;
     }
-    console.log(props.games.data[1])
+
+    function gameFilter(value: IGame): boolean {
+        if (value.data.price < Math.min(...props.price) || value.data.price > Math.max(...props.price)) {
+            return false;
+        }
+        for (let i = 0; i < props.genres.length; i++) {
+            if (!value.data.genre.includes(props.genres[i])) {
+                console.log("work");
+                return false;
+            }
+        }
+        return value.data.game_name.toLowerCase().includes(props.searchTitle.toLowerCase());
+    }
+
     return (
         <>
-            <Grid item xs={9} container spacing={2}>
-                {props.games.data.sort(myCompare).map((item) =>
-                    <Grid item xs={4}>
-                        <Link href={`browse/${item.data.id}`}><MediumCard key={item.data.id}
-                                                                          data={item.data}/></Link>
-                    </Grid>
-                )}
-            </Grid>
+            {props.games.data.filter(gameFilter).sort(myCompare).map((item) =>
+                <Grid item xs={4} key={item.data.id}>
+                    <Link href={`browse/${item.data.id}`}><MediumCard data={item.data}/></Link>
+                </Grid>
+            )}
         </>
     )
 }

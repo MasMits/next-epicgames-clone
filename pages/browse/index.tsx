@@ -24,6 +24,9 @@ export interface ICardProps {
 
 const Browse = (games: ICardProps) => {
     const [typeOfCompare, setTypeOfCompare] = useState('value2');
+    const [value, setValue] = useState<number[]>([0, 5000]);
+    const [genres, setGenres] = React.useState<string[]>([]);
+    const [searchTitle, setSearchTitle] = useState('');
 
     return (
         <Layout>
@@ -34,15 +37,17 @@ const Browse = (games: ICardProps) => {
                     </Grid>
                 </Grid>
                 <Grid container spacing={2}>
-                    <GamesGrid games={games} typeOfCompare={typeOfCompare} filter={' '}/>
+                    <Grid item xs={9} container spacing={2} width={900}>
+                        <GamesGrid games={games} typeOfCompare={typeOfCompare} price={value} genres={genres} searchTitle={searchTitle}/>
+                    </Grid>
                     <Grid item xs={3} container spacing={2}>
-                        <FilterZone/>
+                        <FilterZone setValue={setValue} value={value} genres={genres} setGenres={setGenres} setSearchTitle={setSearchTitle}/>
                     </Grid>
                 </Grid>
             </Stack>
-            <Stack spacing={2}>
-                <Pagination count={10}/>
-            </Stack>
+            {/*<Stack spacing={2}>*/}
+            {/*    <Pagination count={10}/>*/}
+            {/*</Stack>*/}
         </Layout>
     )
 }

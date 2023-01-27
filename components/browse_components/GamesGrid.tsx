@@ -55,7 +55,7 @@ const GamesGrid = (props: ICardProps) => {
     return (
         <Grid container spacing={{ xs: 1, sm: 1, md: 3 }} columns={{xs: 1, sm: 2, md:3, xl:4}}>
             {props.games.data.filter(gameFilter).sort(myCompare).map((item) =>
-                <Grid xs={1} sx={{ display: 'flex', justifyContent:"center"}} >
+                <Grid xs={1} sx={{ display: 'flex', justifyContent:"center"}} key={item.data.id} >
                     <Link href={`browse/${item.data.id}`}><MediumCard data={item.data}/></Link>
                 </Grid>
             )}

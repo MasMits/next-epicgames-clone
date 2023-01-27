@@ -2,7 +2,9 @@ import {IGame} from "../../types/IGame";
 import MediumCard from "../../components/cards/MediumCard";
 import Link from "next/link";
 import React from "react";
-import {Grid} from "@mui/material";
+// import {Grid} from "@mui/material";
+import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
+
 
 export interface ICardProps {
     games: { data: IGame[] },
@@ -44,7 +46,6 @@ const GamesGrid = (props: ICardProps) => {
         }
         for (let i = 0; i < props.genres.length; i++) {
             if (!value.data.genre.includes(props.genres[i])) {
-                console.log("work");
                 return false;
             }
         }
@@ -52,13 +53,13 @@ const GamesGrid = (props: ICardProps) => {
     }
 
     return (
-        <>
+        <Grid container spacing={{ xs: 1, sm: 1, md: 3 }} columns={{xs: 1, sm: 2, md:3, xl:4}}>
             {props.games.data.filter(gameFilter).sort(myCompare).map((item) =>
-                <Grid item xs={4} key={item.data.id}>
+                <Grid xs={1} sx={{ display: 'flex', justifyContent:"center"}} >
                     <Link href={`browse/${item.data.id}`}><MediumCard data={item.data}/></Link>
                 </Grid>
             )}
-        </>
+        </Grid>
     )
 }
 

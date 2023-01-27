@@ -59,9 +59,6 @@ const Browse = (games: ICardProps) => {
                         onClose={() => {
                             setOpenFilterWindow(false)
                         }}
-                        onOpen={() => {
-                            setOpenFilterWindow(true)
-                        }}
                     >
                         {
                             <Box padding={2}>

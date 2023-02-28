@@ -8,7 +8,7 @@ import GamesGrid from "../../components/browse_components/GamesGrid";
 import {NextPageContext} from "next";
 import {IGame} from "../../types/IGame";
 import FilterZone from "../../components/browse_components/FilterZone";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useTheme} from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from "@mui/material/Button";
@@ -17,7 +17,7 @@ import Box from "@mui/material/Box";
 
 export const getServerSideProps = async (ctx: NextPageContext) => {
     try {
-        const response = await fetch(`${process.env.API_HOST}/games`);
+        const response = await fetch(`${process.env.API_HOST}/games?page=4&limit=2`);
         const data = await response.json();
         return {props: {data: [...data]}};
     } catch {
@@ -31,11 +31,42 @@ export interface ICardProps {
 
 
 const Browse = (games: ICardProps) => {
-    const [typeOfCompare, setTypeOfCompare] = useState('value2');
-    const [value, setValue] = useState<number[]>([0, 5000]);
-    const [genres, setGenres] = React.useState<string[]>([]);
+    const [typeOfCompare, setTypeOfCompare] = useState('Alphabetical');
+    const [price, setPrice] = useState<number[]>([0, 5000]);
+    const [genres, setGenres] = useState<string[]>(['Action']);
     const [searchTitle, setSearchTitle] = useState('');
-    ///
+    const [page, setPage] = useState(1);
+    const [finalGames, setFinalGames] = useState<IGame[]>(games.data);
+    const [countPages, setCountPages] = useState<number>(1);
+
+    const pageHandleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value);
+    };
+
+    useEffect(  () => {
+        fetchGames();
+    },[page, price, genres, typeOfCompare, searchTitle] )
+
+    async function fetchGames() {
+        try {
+            console.log(`(${genres.map((el) => 'genres=' + el).join('&')})`);
+            const response = await fetch(`api/games?
+            typeOfCompare=${typeOfCompare}
+            &${genres.map((el) => 'genres=' + el).join('&')}&page=${page}&limit=6
+            &price1=${price[0]}&price2=${price[1]}
+            &searchTitle=${searchTitle}
+            `);
+            // ${genres.map((el) => 'genres=' + el).join('&')}`);
+            const data = await response.json();
+            setCountPages(data.pages);
+            console.log('countPages ' + countPages)
+            setFinalGames( [...data.games]);
+        } catch {
+            console.log('Sorry we have problem')
+            // setFinalGames( []);
+        }
+    }
+
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -62,41 +93,29 @@ const Browse = (games: ICardProps) => {
                     >
                         {
                             <Box padding={2}>
-                                <FilterZone setValue={setValue} value={value} genres={genres} setGenres={setGenres}
+                                <FilterZone setValue={setPrice} value={price} genres={genres} setGenres={setGenres}
                                             setSearchTitle={setSearchTitle}/>
                             </Box>
                         }
                     </Drawer>
 
                 </Stack>
-                {/*<Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>*/}
-                {/*    <Grid item xs={2} container spacing={2}>*/}
-                {/*        <SortZone setTypeOfCompare={setTypeOfCompare}/>*/}
-                {/*    </Grid>*/}
-                {/*</Grid>*/}
-                {/*<Grid container spacing={2}>*/}
                 <Stack
                     direction="row"
                     justifyContent="space-between"
                     spacing={2}
                 >
-                    {/*<Grid item xs={9} container spacing={2}>*/}
-                    <GamesGrid games={games} typeOfCompare={typeOfCompare} price={value} genres={genres}
+                    <GamesGrid games={finalGames} typeOfCompare={typeOfCompare} price={price} genres={genres}
                                searchTitle={searchTitle}/>
-                    {/*</Grid>*/}
                     {!matches &&
-                        // <Grid item xs={3} container spacing={2}>
-                        <FilterZone setValue={setValue} value={value} genres={genres} setGenres={setGenres}
+                        <FilterZone setValue={setPrice} value={price} genres={genres} setGenres={setGenres}
                                     setSearchTitle={setSearchTitle}/>
-                        // </Grid>
                     }
                 </Stack>
-
-                {/*</Grid>*/}
             </Stack>
-            {/*<Stack spacing={2}>*/}
-            {/*    <Pagination count={10}/>*/}
-            {/*</Stack>*/}
+            <Stack spacing={2}>
+                <Pagination count={countPages} page={page} onChange={pageHandleChange}/>
+            </Stack>
         </Layout>
     )
 }

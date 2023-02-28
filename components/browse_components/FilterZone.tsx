@@ -27,16 +27,16 @@ const FilterZone = (props: IProps) =>{
         ]
     };
 
-    const price = {
-        label: "PRICE",
-        names: [
-            'Free',
-            'Under UAN 300.00',
-            'Under UAN 600.00',
-            'Under UAN 900.00',
-            'Discounted',
-        ]
-    };
+    // const price = {
+    //     label: "PRICE",
+    //     names: [
+    //         'Free',
+    //         'Under UAN 300.00',
+    //         'Under UAN 600.00',
+    //         'Under UAN 900.00',
+    //         'Discounted',
+    //     ]
+    // };
 
     return (
         <Stack gap={2}>

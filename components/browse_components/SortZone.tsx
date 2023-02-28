@@ -24,8 +24,8 @@ const SortZone = (props: IProps) => {
                     onChange={handleChange}
                 >
                     <MenuItem value={'Alphabetical'}>Alphabetical</MenuItem>
-                    <MenuItem value={'Price: Low to High'}>Price: Low to High</MenuItem>
-                    <MenuItem value={'Price: High to Low'}>Price: High to Low </MenuItem>
+                    <MenuItem value={'Low_to_High'}>Price: Low to High</MenuItem>
+                    <MenuItem value={'High_to_Low'}>Price: High to Low </MenuItem>
                 </Select>
             </FormControl>
 

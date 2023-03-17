@@ -1,8 +1,7 @@
 import styles from './backtotopbutton.module.scss'
 import KeyboardArrowUpTwoToneIcon from '@mui/icons-material/KeyboardArrowUpTwoTone';
-
-import Button from "@mui/material/Button";
 import {useEffect, useState} from "react";
+import {IconButton} from "@mui/material";
 
 const BackToTopButton = () => {
 
@@ -29,9 +28,9 @@ const BackToTopButton = () => {
         <>
             {
                 height < 500 &&
-                <Button className={styles.container} onClick={toTop}>
+                <IconButton className={styles.container} onClick={toTop}>
                     <KeyboardArrowUpTwoToneIcon/>
-                </Button>
+                </IconButton>
             }
         </>
 

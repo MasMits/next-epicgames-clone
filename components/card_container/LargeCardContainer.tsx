@@ -11,11 +11,11 @@ const LargeCardContainer: FC<ICardProps> = (gameList) => {
         <div>
             <Box className="header" sx={{display: 'flex', justifyContent: 'center', maxWidth: 1170}}>
                 <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 1, sm: 3}}>
-                        {gameList.games.slice(0, 3).map((item) =>
-                            <Grid xs={1} sx={{ display: 'flex', justifyContent:"center"}}>
-                                <Link href={`browse/${item.data.id}`}><LargeCard key={item.data.id} data={item.data}/></Link>
-                            </Grid>
-                        )}
+                        {/*{gameList.games.slice(0, 3).map((item) =>*/}
+                        {/*    // <Grid xs={1} sx={{ display: 'flex', justifyContent:"center"}}>*/}
+                        {/*    //     <Link href={`browse/${item.data.id}`}><LargeCard key={item.data.id} data={item.data}/></Link>*/}
+                        {/*    // </Grid>*/}
+                        {/*)}*/}
                 </Grid>
             </Box>
         </div>

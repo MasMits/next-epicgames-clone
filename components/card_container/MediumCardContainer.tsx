@@ -43,11 +43,11 @@ const MediumCardContainer: FC<ICardProps> = (gameList) => {
             </Box>
 
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 1, sm: 2, md: 4 }}  >
-                {gameList.games.map((item) =>
-                    <Grid xs={1} sx={{ display: 'flex', justifyContent:"center"}}>
-                        <Link href={`browse/${item.data.id}`}><MediumCard key={item.data.id} data={item.data}/></Link>
-                    </Grid>
-                )}
+                {/*{gameList.games.map((item) =>*/}
+                {/*    <Grid xs={1} sx={{ display: 'flex', justifyContent:"center"}}>*/}
+                {/*        <Link href={`browse/${item.data.id}`}><MediumCard key={item.data.id} data={item.data}/></Link>*/}
+                {/*    </Grid>*/}
+                {/*)}*/}
             </Grid>
             {/*<Grid container spacing={{ xs: 2, md: 3 }} >*/}
             {/*    {items.map((item) =>*/}

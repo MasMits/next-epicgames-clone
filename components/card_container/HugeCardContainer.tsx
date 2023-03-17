@@ -11,9 +11,9 @@ const HugeCardContainer: FC<ICardProps> = (gameList) => {
             <div>
                 <div className="smallCard_container">
                     <div className="SmallCardContainer">
-                        {gameList.games.map((item) =>
-                            <Link href={`browse/${item.data.id}`}> <SmallCard key={item.data.id} data={item.data}/></Link>
-                        )}
+                        {/*{gameList.games.map((item) =>*/}
+                        {/*    <Link href={`browse/${item.data.id}`}> <SmallCard key={item.data.id} data={item.data}/></Link>*/}
+                        {/*)}*/}
                     </div>
                 </div>
             </div>

@@ -28,9 +28,11 @@ const BackToTopButton = () => {
         <>
             {
                 height < 500 &&
-                <IconButton className={styles.container} onClick={toTop}>
-                    <KeyboardArrowUpTwoToneIcon/>
-                </IconButton>
+                <div className={styles.container}>
+                    <IconButton  onClick={toTop} sx={{backgroundColor: '#444444'}}>
+                        <KeyboardArrowUpTwoToneIcon/>
+                    </IconButton>
+                </div>
             }
         </>
 

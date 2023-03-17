@@ -1,9 +1,10 @@
 import {PropsWithChildren} from "react";
 import Head from "next/head";
 import styles from '../styles/Home.module.scss'
-import Header from "./Header";
+import Header from "./game_page/Header/Header";
 import {createTheme} from "@mui/material/styles";
 import {ThemeProvider} from "@mui/material";
+import Footer from "./Footer/Footer";
 
 
 const Layout = ({children}: PropsWithChildren<{}>) => {
@@ -41,6 +42,7 @@ const Layout = ({children}: PropsWithChildren<{}>) => {
                 <div className={styles.description}>
                 </div>
             </main>
+            <Footer/>
         </ThemeProvider>
     )
 

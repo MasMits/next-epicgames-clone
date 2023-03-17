@@ -7,7 +7,7 @@ const SimpleCard : FC<ICardProps> = (gameList) => {
     return (
         <div className={styles.flex}>
                 {gameList.games.map((item) =>
-                        <div className={styles.flexItem}><Link href={`browse/${item.data.id}`}><MediumCard key={item.data.id} data={item.data}/></Link></div>
+                        <div className={styles.flexItem} key={item.data.id}><Link href={`browse/${item.data.id}`}><MediumCard key={item.data.id} data={item.data}/></Link></div>
                 )}
         </div>
     );
